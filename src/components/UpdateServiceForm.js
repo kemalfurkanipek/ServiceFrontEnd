@@ -14,7 +14,7 @@ function UpdateServiceForm() {
 
   useEffect(() => {
     // Servis bilgilerini al ve formu doldur
-    axios.get(`https://service-management-system-001298c64913.herokuapp.com/services/${id}`)
+    axios.get(`https://service-backend-chi.vercel.app/services/${id}`)
       .then(response => {
         setPlate(response.data.plate);
         setSchool(response.data.schoolId);
@@ -26,7 +26,7 @@ function UpdateServiceForm() {
       });
 
     // Okul listesini al
-    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
+    axios.get('https://service-backend-chi.vercel.app/schools')
       .then(response => {
         setSchools(response.data);
       })
@@ -57,7 +57,7 @@ function UpdateServiceForm() {
     }
 
     const service = { plate, schoolId };
-    axios.put(`https://service-management-system-001298c64913.herokuapp.com/services/${id}`, service)
+    axios.put(`https://service-backend-chi.vercel.app/services/${id}`, service)
       .then(response => {
         console.log('Servis güncellendi:', response.data);
         navigate('/services', { state: { success: true, message: 'Servis başarıyla güncellendi!' } });

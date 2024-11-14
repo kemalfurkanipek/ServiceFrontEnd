@@ -17,7 +17,7 @@ function SchoolList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
+    axios.get('https://service-backend-chi.vercel.app/schools')
       .then(response => setSchools(response.data))
       .catch(error => console.error('Veri çekme hatası:', error));
   }, []);
@@ -41,7 +41,7 @@ function SchoolList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://service-management-system-001298c64913.herokuapp.com/schools/${selectedSchool}`)
+    axios.delete(`https://service-backend-chi.vercel.app/schools/${selectedSchool}`)
       .then(response => {
         setSchools(schools.filter(school => school._id !== selectedSchool));
         setShowModal(false);

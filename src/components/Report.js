@@ -11,7 +11,7 @@ function Report() {
 
   useEffect(() => {
     // Tüm hesapları getirme
-    axios.get('https://service-management-system-001298c64913.herokuapp.com/accounts')
+    axios.get('https://service-backend-chi.vercel.app/accounts')
       .then(response => {
         setAccounts(response.data); // Tüm hesapları getir, ama filtrelemeyi butona basınca yap
       })

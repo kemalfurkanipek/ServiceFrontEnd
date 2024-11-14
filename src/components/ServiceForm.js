@@ -27,7 +27,7 @@ function ServiceForm() {
         return;
       }
     const service = { plate, schoolId };
-    axios.post('https://service-management-system-001298c64913.herokuapp.com/services', service)
+    axios.post('https://service-backend-chi.vercel.app/services', service)
       .then(response => {
         console.log('Servis eklendi:', response.data);
         navigate('/services',{ state: { success: true, message: 'Servis Başarıyla Eklendi.' } });  // Servis listesine yönlendir
@@ -38,7 +38,7 @@ function ServiceForm() {
     navigate('/services'); // Okul listesine yönlendir
   };
   useEffect(() => {
-    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
+    axios.get('https://service-backend-chi.vercel.app/schools')
       .then(response => {
         setSchools(response.data); // Okulları state'e kaydet
       })
