@@ -24,7 +24,7 @@ function SchoolForm() {
         return;
       }
     const school = { name, location};
-    axios.post('https://service-backend-chi.vercel.app/schools', school)
+    axios.post('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools', school)
       .then(response => {
         console.log('Okul eklendi:', response.data);
         navigate('/schools',{ state: { success: true, message: 'Okul Başarıyla Eklendi.' } });  // Öğrenci listesine yönlendir

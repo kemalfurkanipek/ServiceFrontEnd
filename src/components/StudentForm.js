@@ -33,7 +33,7 @@ function StudentForm() {
       }
     const student = { name, surname, address, telephone, schoolId, serviceId };
     console.log('GÖNDERİLEN',student)
-    axios.post('https://service-backend-chi.vercel.app/students', student)
+    axios.post('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students', student)
       .then(response => {
         console.log('Öğrenci eklendi:', response.data);
         navigate('/students',{ state: { success: true, message: 'Öğrenci Başarıyla Eklendi.' } });  // Servis listesine yönlendir
@@ -44,7 +44,7 @@ function StudentForm() {
     navigate('/students'); // Okul listesine yönlendir
   };
   useEffect(() => {
-    axios.get('https://service-backend-chi.vercel.app/schools')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools')
       .then(response => {
         setSchools(response.data); // Okulları state'e kaydet
       })
@@ -52,7 +52,7 @@ function StudentForm() {
   }, []);
 
   useEffect(() => {
-    axios.get('https://service-backend-chi.vercel.app/services')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/services')
       .then(response => {
         setServices(response.data); // Okulları state'e kaydet
       })

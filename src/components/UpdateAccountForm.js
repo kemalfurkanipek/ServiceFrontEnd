@@ -15,7 +15,7 @@ function UpdateAccountForm() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`https://service-backend-chi.vercel.app/accounts/${id}`)
+    axios.get(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts/${id}`)
       .then(response => {
         const account = response.data;
         setStudentId(account.studentId);
@@ -93,7 +93,7 @@ function UpdateAccountForm() {
       monthlyPayments,
     };
 
-    axios.put(`https://service-backend-chi.vercel.app/accounts/${id}`, accountData)
+    axios.put(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts/${id}`, accountData)
       .then(response => {
         console.log('Hesap güncellendi:', response.data);
         navigate('/accounts', { state: { success: true, message: 'Hesap başarıyla güncellendi!' } });

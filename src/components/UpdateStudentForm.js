@@ -19,20 +19,20 @@ function UpdateStudentForm() {
 
   useEffect(() => {
     // Okul ve servis listesini al
-    axios.get('https://service-backend-chi.vercel.app/schools')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools')
       .then(response => {
         setSchools(response.data);
       })
       .catch(error => console.error('Okul bilgileri getirme hatası:', error));
     
-    axios.get('https://service-backend-chi.vercel.app/services')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/services')
       .then(response => {
         setServices(response.data);
       })
       .catch(error => console.error('Servis bilgileri getirme hatası:', error));
     
     // Öğrenci bilgilerini al ve formu doldur
-    axios.get(`https://service-backend-chi.vercel.app/students/${id}`)
+    axios.get(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students/${id}`)
       .then(response => {
         const student = response.data;
         console.log('STUDENT', student);
@@ -84,7 +84,7 @@ function UpdateStudentForm() {
 
     const student = { name, surname, address, telephone, schoolId, serviceId };
 
-    axios.put(`https://service-backend-chi.vercel.app/students/${id}`, student)
+    axios.put(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students/${id}`, student)
       .then(response => {
         console.log('Öğrenci güncellendi:', response.data);
         navigate('/students', { state: { success: true, message: 'Öğrenci başarıyla güncellendi!' } });

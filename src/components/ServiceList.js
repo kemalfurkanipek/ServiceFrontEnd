@@ -16,11 +16,11 @@ function ServiceList() {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('https://service-backend-chi.vercel.app/services')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/services')
       .then(response => {
         const serviceData = response.data;
         const schoolRequests = serviceData.map(service => 
-          axios.get(`https://service-backend-chi.vercel.app/schools/${service.schoolId}`)
+          axios.get(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools/${service.schoolId}`)
             .then(schoolResponse => schoolResponse.data.name)
             .catch(() => 'Okul Silinmiş')
         );
@@ -54,7 +54,7 @@ function ServiceList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://service-backend-chi.vercel.app/services/${selectedService}`)
+    axios.delete(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/services/${selectedService}`)
       .then(response => {
         setServices(services.filter(service => service._id !== selectedService));
         setShowModal(false);

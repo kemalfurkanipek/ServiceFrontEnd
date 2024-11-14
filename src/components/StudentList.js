@@ -40,7 +40,7 @@ function StudentList() {
   const serviceTooltipRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://service-backend-chi.vercel.app/students')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students')
       .then(response => {
         const studentData = response.data;
         setStudents(studentData);
@@ -66,7 +66,7 @@ function StudentList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://service-backend-chi.vercel.app/students/${selectedStudent}`)
+    axios.delete(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students/${selectedStudent}`)
       .then(response => {
         setStudents(students.filter(student => student._id !== selectedStudent));
         setShowModal(false);

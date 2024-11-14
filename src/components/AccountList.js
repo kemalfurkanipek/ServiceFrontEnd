@@ -37,18 +37,18 @@ function AccountList() {
   const remainingDebtTooltipRef = useRef(null);
 
   useEffect(() => {
-    axios.get('https://service-backend-chi.vercel.app/accounts')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts')
       .then(response => {
         setAccounts(response.data);
         setFilteredAccounts(response.data);
       })
       .catch(error => console.error('Veri çekme hatası:', error));
 
-    axios.get('https://service-backend-chi.vercel.app/schools')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools')
       .then(response => setSchools(response.data))
       .catch(error => console.error('Okullar çekme hatası:', error));
 
-    axios.get('https://service-backend-chi.vercel.app/services')
+    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/services')
       .then(response => setServices(response.data))
       .catch(error => console.error('Servisler çekme hatası:', error));
   }, []);
@@ -102,7 +102,7 @@ function AccountList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://service-backend-chi.vercel.app/accounts/${selectedAccount}`)
+    axios.delete(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts/${selectedAccount}`)
       .then(response => {
         const updatedAccounts = accounts.filter(account => account._id !== selectedAccount);
         setAccounts(updatedAccounts);
