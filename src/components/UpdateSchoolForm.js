@@ -13,7 +13,7 @@ function UpdateSchoolForm() {
 
   useEffect(() => {
     // Okul bilgilerini al ve formu doldur
-    axios.get(`http://localhost:5001/schools/${id}`)
+    axios.get(`https://service-management-system-001298c64913.herokuapp.com/schools/${id}`)
       .then(response => {
         console.log('sss',response.data)
         setName(response.data.name);
@@ -43,7 +43,7 @@ function UpdateSchoolForm() {
     }
 
     const school = { name, location }; // addrees -> address olarak düzeltildi
-    axios.put(`http://localhost:5001/schools/${id}`, school)
+    axios.put(`https://service-management-system-001298c64913.herokuapp.com/schools/${id}`, school)
       .then(response => {
         console.log('Okul güncellendi:', response.data);
         navigate('/schools', { state: { success: true, message: 'Okul başarıyla güncellendi!' } });

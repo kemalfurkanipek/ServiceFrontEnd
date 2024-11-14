@@ -33,7 +33,7 @@ function StudentForm() {
       }
     const student = { name, surname, address, telephone, schoolId, serviceId };
     console.log('GÖNDERİLEN',student)
-    axios.post('http://localhost:5001/students', student)
+    axios.post('https://service-management-system-001298c64913.herokuapp.com/students', student)
       .then(response => {
         console.log('Öğrenci eklendi:', response.data);
         navigate('/students',{ state: { success: true, message: 'Öğrenci Başarıyla Eklendi.' } });  // Servis listesine yönlendir
@@ -44,7 +44,7 @@ function StudentForm() {
     navigate('/students'); // Okul listesine yönlendir
   };
   useEffect(() => {
-    axios.get('http://localhost:5001/schools')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
       .then(response => {
         setSchools(response.data); // Okulları state'e kaydet
       })
@@ -52,7 +52,7 @@ function StudentForm() {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/services')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/services')
       .then(response => {
         setServices(response.data); // Okulları state'e kaydet
       })

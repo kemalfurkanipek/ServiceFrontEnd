@@ -16,11 +16,11 @@ function ServiceList() {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('http://localhost:5001/services')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/services')
       .then(response => {
         const serviceData = response.data;
         const schoolRequests = serviceData.map(service => 
-          axios.get(`http://localhost:5001/schools/${service.schoolId}`)
+          axios.get(`https://service-management-system-001298c64913.herokuapp.com/schools/${service.schoolId}`)
             .then(schoolResponse => schoolResponse.data.name)
             .catch(() => 'Okul Silinmiş')
         );
@@ -54,7 +54,7 @@ function ServiceList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:5001/services/${selectedService}`)
+    axios.delete(`https://service-management-system-001298c64913.herokuapp.com/services/${selectedService}`)
       .then(response => {
         setServices(services.filter(service => service._id !== selectedService));
         setShowModal(false);

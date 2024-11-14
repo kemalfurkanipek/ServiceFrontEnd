@@ -24,7 +24,7 @@ function SchoolForm() {
         return;
       }
     const school = { name, location};
-    axios.post('http://localhost:5001/schools', school)
+    axios.post('https://service-management-system-001298c64913.herokuapp.com/schools', school)
       .then(response => {
         console.log('Okul eklendi:', response.data);
         navigate('/schools',{ state: { success: true, message: 'Okul Başarıyla Eklendi.' } });  // Öğrenci listesine yönlendir

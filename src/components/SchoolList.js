@@ -17,7 +17,7 @@ function SchoolList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:5001/schools')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
       .then(response => setSchools(response.data))
       .catch(error => console.error('Veri çekme hatası:', error));
   }, []);
@@ -41,7 +41,7 @@ function SchoolList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:5001/schools/${selectedSchool}`)
+    axios.delete(`https://service-management-system-001298c64913.herokuapp.com/schools/${selectedSchool}`)
       .then(response => {
         setSchools(schools.filter(school => school._id !== selectedSchool));
         setShowModal(false);

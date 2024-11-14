@@ -14,7 +14,7 @@ function UpdateServiceForm() {
 
   useEffect(() => {
     // Servis bilgilerini al ve formu doldur
-    axios.get(`http://localhost:5001/services/${id}`)
+    axios.get(`https://service-management-system-001298c64913.herokuapp.com/services/${id}`)
       .then(response => {
         setPlate(response.data.plate);
         setSchool(response.data.schoolId);
@@ -26,7 +26,7 @@ function UpdateServiceForm() {
       });
 
     // Okul listesini al
-    axios.get('http://localhost:5001/schools')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/schools')
       .then(response => {
         setSchools(response.data);
       })
@@ -57,7 +57,7 @@ function UpdateServiceForm() {
     }
 
     const service = { plate, schoolId };
-    axios.put(`http://localhost:5001/services/${id}`, service)
+    axios.put(`https://service-management-system-001298c64913.herokuapp.com/services/${id}`, service)
       .then(response => {
         console.log('Servis güncellendi:', response.data);
         navigate('/services', { state: { success: true, message: 'Servis başarıyla güncellendi!' } });

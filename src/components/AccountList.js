@@ -35,7 +35,7 @@ function AccountList() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5001/accounts')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/accounts')
       .then(response => {
         setAccounts(response.data);
         setFilteredAccounts(response.data); // İlk başta tüm hesaplar gösterilecek
@@ -115,7 +115,7 @@ function AccountList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:5001/accounts/${selectedAccount}`)
+    axios.delete(`https://service-management-system-001298c64913.herokuapp.com/accounts/${selectedAccount}`)
       .then(response => {
         // Hesabı silindikten sonra güncellenen hesap listelerini ayarlıyoruz
         const updatedAccounts = accounts.filter(account => account._id !== selectedAccount);

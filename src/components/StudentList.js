@@ -40,7 +40,7 @@ function StudentList() {
   const serviceTooltipRef = useRef(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/students')
+    axios.get('https://service-management-system-001298c64913.herokuapp.com/students')
       .then(response => {
         const studentData = response.data;
         setStudents(studentData);
@@ -66,7 +66,7 @@ function StudentList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:5001/students/${selectedStudent}`)
+    axios.delete(`https://service-management-system-001298c64913.herokuapp.com/students/${selectedStudent}`)
       .then(response => {
         setStudents(students.filter(student => student._id !== selectedStudent));
         setShowModal(false);
