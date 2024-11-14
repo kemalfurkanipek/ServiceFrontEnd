@@ -17,14 +17,14 @@ function AccountForm() {
   const { id } = useParams(); // URL parametresinden hesap ID'sini al
 
   useEffect(() => {
-    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/students')
+    axios.get('https://service-backend-fawn.vercel.app/students')
       .then(response => {
         setStudents(response.data);
       })
       .catch(error => console.error('Öğrenci bilgilerini getirme hatası:', error));
 
     if (id) {
-      axios.get(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts/${id}`)
+      axios.get(`https://service-backend-fawn.vercel.app/accounts/${id}`)
         .then(response => {
           const account = response.data;
           setStudentId(account.studentId);
@@ -116,7 +116,7 @@ function AccountForm() {
     };
 
     if (id) {
-      axios.put(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts/${id}`, accountData)
+      axios.put(`https://service-backend-fawn.vercel.app/accounts/${id}`, accountData)
         .then(response => {
           navigate('/accounts', { state: { success: true, message: 'Hesap başarıyla güncellendi!' } });
         })
@@ -125,7 +125,7 @@ function AccountForm() {
           handleClick('Hesap güncellenirken bir hata oluştu.');
         });
     } else {
-      axios.post('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts', accountData)
+      axios.post('https://service-backend-fawn.vercel.app/accounts', accountData)
         .then(response => {
           navigate('/accounts', { state: { success: true, message: 'Hesap başarıyla eklendi!' } });
         })

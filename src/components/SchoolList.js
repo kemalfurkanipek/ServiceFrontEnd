@@ -17,7 +17,7 @@ function SchoolList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools')
+    axios.get('https://service-backend-fawn.vercel.app/schools')
       .then(response => setSchools(response.data))
       .catch(error => console.error('Veri çekme hatası:', error));
   }, []);
@@ -41,7 +41,7 @@ function SchoolList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools/${selectedSchool}`)
+    axios.delete(`https://service-backend-fawn.vercel.app/schools/${selectedSchool}`)
       .then(response => {
         setSchools(schools.filter(school => school._id !== selectedSchool));
         setShowModal(false);

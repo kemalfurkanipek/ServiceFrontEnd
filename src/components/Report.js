@@ -11,7 +11,7 @@ function Report() {
 
   useEffect(() => {
     // Tüm hesapları getirme
-    axios.get('https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/accounts')
+    axios.get('https://service-backend-fawn.vercel.app/accounts')
       .then(response => {
         setAccounts(response.data); // Tüm hesapları getir, ama filtrelemeyi butona basınca yap
       })

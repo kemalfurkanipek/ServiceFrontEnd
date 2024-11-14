@@ -13,7 +13,7 @@ function UpdateSchoolForm() {
 
   useEffect(() => {
     // Okul bilgilerini al ve formu doldur
-    axios.get(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools/${id}`)
+    axios.get(`https://service-backend-fawn.vercel.app/schools/${id}`)
       .then(response => {
         console.log('sss',response.data)
         setName(response.data.name);
@@ -43,7 +43,7 @@ function UpdateSchoolForm() {
     }
 
     const school = { name, location }; // addrees -> address olarak düzeltildi
-    axios.put(`https://service-backend-fawn.vercel.app/?vercelToolbarCode=BVD4sv2FgiQr6dU/schools/${id}`, school)
+    axios.put(`https://service-backend-fawn.vercel.app/schools/${id}`, school)
       .then(response => {
         console.log('Okul güncellendi:', response.data);
         navigate('/schools', { state: { success: true, message: 'Okul başarıyla güncellendi!' } });
