@@ -48,7 +48,7 @@ function AccountList() {
 
     // Sütun genişliklerini ayarlama
     const wscols = [];
-    data.forEach((row) => {
+    excelData.forEach((row) => {
       Object.keys(row).forEach((key, index) => {
         // Eğer o sütunda genişlik yoksa, içerik uzunluğuna göre bir değer ekle
         const cellValue = String(row[key] || '');
