@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Accordion, Table, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEdit, FaTrashAlt, FaWhatsapp, FaSearch } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaWhatsapp } from 'react-icons/fa';
 import { Snackbar, Alert } from '@mui/material';
 
 function AccountList() {
@@ -15,6 +15,7 @@ function AccountList() {
   const [selectedService, setSelectedService] = useState('');
   const [filterBySchool, setFilterBySchool] = useState(false);
   const [filterByService, setFilterByService] = useState(false);
+  const [filterByStudent,setFilterByStudent] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [open, setOpen] = useState(false);
@@ -53,6 +54,14 @@ function AccountList() {
       .catch(error => console.error('Servisler çekme hatası:', error));
   }, []);
 
+  const filterNotAccounts = () => {
+      setFilterBySchool(false)
+      setFilterByStudent(false)
+      setFilterByService(false)
+      setNameFilter('')
+      
+  }
+
   const filterAccounts = () => {
     let filtered = accounts;
 
@@ -88,11 +97,21 @@ function AccountList() {
     if (type === 'school') {
       setFilterBySchool(!filterBySchool);
       setFilterByService(false);
+      setFilterByStudent(false)
       setSelectedService('');
+      setNameFilter('')
     } else if (type === 'service') {
       setFilterByService(!filterByService);
       setFilterBySchool(false);
+      setFilterByStudent(false)
       setSelectedSchool('');
+      setNameFilter('')
+    } else if (type === 'student') {
+      setFilterByStudent(!filterByStudent)
+      setFilterBySchool(false)
+      setFilterByService(false)
+      setSelectedSchool('')
+      setSelectedService('')
     }
   };
 
@@ -222,8 +241,36 @@ function AccountList() {
             )}
           </div>
 
+          <div className="col-md-3">
+            <Form.Check 
+              type="checkbox"
+              label="Öğrenciye Göre Filtrele"
+              checked={filterByStudent}
+              onChange={() => handleCheckboxChange('student')}
+            />
+            {filterByStudent && (
+  <Form.Group controlId="selectService">
+    <Form.Label>Öğrenci</Form.Label>
+    <Form.Control
+      type="text"  // Text input tipi kullanıyoruz
+      value={nameFilter}
+      onChange={(e) => setNameFilter(e.target.value)}  // Metin girişini güncelleme
+      placeholder="Öğrenci Adı Veya Soyadı"  // Placeholder eklenebilir
+    />
+  </Form.Group>
+)}
+
+          </div>
+
           <div>
             <Button variant="primary" onClick={filterAccounts}>Ara</Button>
+            <Button 
+  variant="primary" 
+  onClick={filterNotAccounts} 
+  className="ms-3"  // Bootstrap 5 için margin-start (sol) ekler
+>
+  Filtreleri Temizle
+</Button>
           </div>
         </div>
       </div>
