@@ -60,13 +60,37 @@ function AccountList() {
     // Sütun genişliklerini uygula
     ws['!cols'] = wscols.map((width) => ({ wpx: width * 10 })); // 10px olarak genişliği ayarlayın
 
+    // Kenarlık stilini oluşturma
+    const borderStyle = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' },
+    };
+
+    // Hücrelerde border ekleme
+    Object.keys(ws).forEach((key) => {
+      if (key[0] === '!') return; // Meta verileri atla
+
+      const cell = ws[key];
+
+      // Eğer hücrede bir değer varsa, buna border ekle
+      if (cell && cell.v !== undefined) {
+        cell.s = cell.s || {}; // Stil objesi oluştur
+
+        // Border'ı hücreye ekle
+        cell.s.border = borderStyle;
+      }
+    });
+
     // Çalışma kitabını oluşturma
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     // Excel dosyasını indirme
     XLSX.writeFile(wb, 'data.xlsx');
-  };
+};
+
 
   useEffect(() => {
     axios.get('https://service-backend-fawn.vercel.app/accounts')
