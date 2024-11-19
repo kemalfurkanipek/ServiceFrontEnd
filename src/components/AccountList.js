@@ -43,17 +43,29 @@ function AccountList() {
   
 
   const exportToExcel = () => {
-
-    
-    // Array'yi sheet formatına çevir
+    // Excel için çalışacak veriyi hazırlama
     const ws = XLSX.utils.json_to_sheet(excelData);
 
-    // Excel dosyasını oluştur
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Data');
+    // Sütun genişliklerini ayarlama
+    const wscols = [];
+    data.forEach((row) => {
+      Object.keys(row).forEach((key, index) => {
+        // Eğer o sütunda genişlik yoksa, içerik uzunluğuna göre bir değer ekle
+        const cellValue = String(row[key] || '');
+        const columnIndex = wscols[index] || 0;
+        wscols[index] = Math.max(columnIndex, cellValue.length);
+      });
+    });
 
-    // Dosyayı indir
-    XLSX.writeFile(wb, 'veri.xlsx');
+    // Sütun genişliklerini uygula
+    ws['!cols'] = wscols.map((width) => ({ wpx: width * 10 })); // 10px olarak genişliği ayarlayın
+
+    // Çalışma kitabını oluşturma
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Excel dosyasını indirme
+    XLSX.writeFile(wb, 'data.xlsx');
   };
 
   useEffect(() => {
