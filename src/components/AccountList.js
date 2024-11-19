@@ -5,6 +5,8 @@ import { Modal, Button, Accordion, Table, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit, FaTrashAlt, FaWhatsapp } from 'react-icons/fa';
 import { Snackbar, Alert } from '@mui/material';
+import * as XLSX from 'xlsx';
+ 
 
 function AccountList() {
   const [accounts, setAccounts] = useState([]);
@@ -29,13 +31,30 @@ function AccountList() {
   const [showNameTooltip, setShowNameTooltip] = useState(false);
   const [showTotalDebtTooltip, setShowTotalDebtTooltip] = useState(false);
   const [showRemainingDebtTooltip, setShowRemainingDebtTooltip] = useState(false);
-  
+  const [excelData,setExcelData] = useState([]);
+  const [excel,setExcel] = useState(false);
   const nameButtonRef = useRef(null);
   const totalDebtButtonRef = useRef(null);
   const remainingDebtButtonRef = useRef(null);
   const nameTooltipRef = useRef(null);
   const totalDebtTooltipRef = useRef(null);
   const remainingDebtTooltipRef = useRef(null);
+
+  
+
+  const exportToExcel = () => {
+
+    
+    // Array'yi sheet formatına çevir
+    const ws = XLSX.utils.json_to_sheet(excelData);
+
+    // Excel dosyasını oluştur
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Data');
+
+    // Dosyayı indir
+    XLSX.writeFile(wb, 'veri.xlsx');
+  };
 
   useEffect(() => {
     axios.get('https://service-backend-fawn.vercel.app/accounts')
@@ -59,13 +78,15 @@ function AccountList() {
       setFilterByStudent(false)
       setFilterByService(false)
       setNameFilter('')
+      setExcel(false)
       
   }
 
   const filterAccounts = () => {
     let filtered = accounts;
-
+    setExcel(false)
     if (nameFilter) {
+      setExcel(true)
       filtered = filtered.filter(account =>
         account.studentId?.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
         account.studentId?.surname.toLowerCase().includes(nameFilter.toLowerCase())
@@ -73,23 +94,46 @@ function AccountList() {
     }
 
     if (totalDebtFilter) {
+      setExcel(true)
       filtered = filtered.filter(account =>
         account.totalDebt.toString().includes(totalDebtFilter)
       );
     }
 
     if (remainingDebtFilter) {
+      setExcel(true)
       filtered = filtered.filter(account =>
         account.remainingDebt.toString().includes(remainingDebtFilter)
       );
     }
 
     if (filterBySchool && selectedSchool) {
+      setExcel(true)
       filtered = filtered.filter(account => account.studentId?.schoolId === selectedSchool);
     } else if (filterByService && selectedService) {
+      setExcel(true)
       filtered = filtered.filter(account => account.studentId?.serviceId === selectedService);
     }
 
+    let excelDataNew = [];
+    console.log('Filtered SON --->',filtered)
+
+    filtered.map((item,index) =>{
+        excelDataNew.push({
+          'sıra no': index +1,
+          'öğrenci ismi': item.studentId.name,
+          '1.Ay': item.monthlyPayments[0].amountPaid !== 0 ? item.monthlyPayments[0].receiptNumber + '-' + item.monthlyPayments[0].amountPaid : '',
+          '2.Ay': item.monthlyPayments[1].amountPaid !== 0 ? item.monthlyPayments[1].receiptNumber + '-' + item.monthlyPayments[1].amountPaid : '',
+          '3.Ay': item.monthlyPayments[2].amountPaid !== 0 ? item.monthlyPayments[2].receiptNumber + '-' + item.monthlyPayments[2].amountPaid : '',
+          '4.Ay': item.monthlyPayments[3].amountPaid !== 0 ? item.monthlyPayments[3].receiptNumber + '-' + item.monthlyPayments[3].amountPaid : '',
+          '5.Ay': item.monthlyPayments[4].amountPaid !== 0 ? item.monthlyPayments[4].receiptNumber + '-' + item.monthlyPayments[4].amountPaid : '',
+          '6.Ay': item.monthlyPayments[5].amountPaid !== 0 ? item.monthlyPayments[5].receiptNumber + '-' + item.monthlyPayments[5].amountPaid : '',
+          '7.Ay': item.monthlyPayments[6].amountPaid !== 0 ? item.monthlyPayments[6].receiptNumber + '-' + item.monthlyPayments[6].amountPaid : '',
+          '8.Ay': item.monthlyPayments[7].amountPaid !== 0 ? item.monthlyPayments[7].receiptNumber + '-' + item.monthlyPayments[7].amountPaid : '',
+          '9.Ay': item.monthlyPayments[8].amountPaid !== 0 ? item.monthlyPayments[8].receiptNumber + '-' + item.monthlyPayments[8].amountPaid : '',
+        })
+    })
+    setExcelData(excelDataNew)
     setFilteredAccounts(filtered);
   };
 
@@ -271,6 +315,15 @@ function AccountList() {
 >
   Filtreleri Temizle
 </Button>
+{excel && (
+        <Button 
+          variant="primary" 
+          onClick={exportToExcel} 
+          className="ms-3"  // Bootstrap 5 için margin-start (sol) ekler
+        >
+          Excel Al
+        </Button>
+      )}
           </div>
         </div>
       </div>
