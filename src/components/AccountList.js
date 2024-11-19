@@ -121,16 +121,17 @@ function AccountList() {
     filtered.map((item,index) =>{
         excelDataNew.push({
           'sıra no': index +1,
-          'öğrenci ismi': item.studentId.name,
-          '1.Ay': item.monthlyPayments[0].amountPaid !== 0 ? item.monthlyPayments[0].receiptNumber + '-' + item.monthlyPayments[0].amountPaid : '',
-          '2.Ay': item.monthlyPayments[1].amountPaid !== 0 ? item.monthlyPayments[1].receiptNumber + '-' + item.monthlyPayments[1].amountPaid : '',
-          '3.Ay': item.monthlyPayments[2].amountPaid !== 0 ? item.monthlyPayments[2].receiptNumber + '-' + item.monthlyPayments[2].amountPaid : '',
-          '4.Ay': item.monthlyPayments[3].amountPaid !== 0 ? item.monthlyPayments[3].receiptNumber + '-' + item.monthlyPayments[3].amountPaid : '',
-          '5.Ay': item.monthlyPayments[4].amountPaid !== 0 ? item.monthlyPayments[4].receiptNumber + '-' + item.monthlyPayments[4].amountPaid : '',
-          '6.Ay': item.monthlyPayments[5].amountPaid !== 0 ? item.monthlyPayments[5].receiptNumber + '-' + item.monthlyPayments[5].amountPaid : '',
-          '7.Ay': item.monthlyPayments[6].amountPaid !== 0 ? item.monthlyPayments[6].receiptNumber + '-' + item.monthlyPayments[6].amountPaid : '',
-          '8.Ay': item.monthlyPayments[7].amountPaid !== 0 ? item.monthlyPayments[7].receiptNumber + '-' + item.monthlyPayments[7].amountPaid : '',
-          '9.Ay': item.monthlyPayments[8].amountPaid !== 0 ? item.monthlyPayments[8].receiptNumber + '-' + item.monthlyPayments[8].amountPaid : '',
+          'öğrenci ismi': item.studentId.name + item.studentId.surname,
+          'tel': item.studentId.telephone,
+          '1.Ay': item.monthlyPayments[0].amountPaid !== 0 ? item.monthlyPayments[0].amountPaid : '',
+          '2.Ay': item.monthlyPayments[1].amountPaid !== 0 ? item.monthlyPayments[1].amountPaid : '',
+          '3.Ay': item.monthlyPayments[2].amountPaid !== 0 ? item.monthlyPayments[2].amountPaid : '',
+          '4.Ay': item.monthlyPayments[3].amountPaid !== 0 ? item.monthlyPayments[3].amountPaid : '',
+          '5.Ay': item.monthlyPayments[4].amountPaid !== 0 ? item.monthlyPayments[4].amountPaid : '',
+          '6.Ay': item.monthlyPayments[5].amountPaid !== 0 ? item.monthlyPayments[5].amountPaid : '',
+          '7.Ay': item.monthlyPayments[6].amountPaid !== 0 ? item.monthlyPayments[6].amountPaid : '',
+          '8.Ay': item.monthlyPayments[7].amountPaid !== 0 ? item.monthlyPayments[7].amountPaid : '',
+          '9.Ay': item.monthlyPayments[8].amountPaid !== 0 ? item.monthlyPayments[8].amountPaid : '',
         })
     })
     setExcelData(excelDataNew)
