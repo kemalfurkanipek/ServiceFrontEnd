@@ -46,6 +46,24 @@ function AccountList() {
     // Excel için çalışacak veriyi hazırlama
     const ws = XLSX.utils.json_to_sheet(excelData);
 
+    // Kenarlık stili tanımlama
+    const borderStyle = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+    };
+
+    // Veriye kenarlık ekleme
+    Object.keys(ws).forEach((cell) => {
+        if (cell[0] === '!') return; // '!' işareti metadata alanları içindir, bu hücrelere işlem yapma
+        const cellValue = ws[cell];
+
+        // Her hücreye kenarlık ekle
+        cellValue.s = cellValue.s || {}; // Hücrede stil varsa, varsa ekle, yoksa boş bir stil nesnesi oluştur
+        cellValue.s.border = borderStyle;
+    });
+
     // Sütun genişliklerini ayarlama
     const wscols = [];
     excelData.forEach((row) => {
@@ -60,29 +78,6 @@ function AccountList() {
     // Sütun genişliklerini uygula
     ws['!cols'] = wscols.map((width) => ({ wpx: width * 10 })); // 10px olarak genişliği ayarlayın
 
-    // Kenarlık stilini oluşturma
-    const borderStyle = {
-      top: { style: 'thin' },
-      left: { style: 'thin' },
-      bottom: { style: 'thin' },
-      right: { style: 'thin' },
-    };
-
-    // Hücrelerde border ekleme
-    Object.keys(ws).forEach((key) => {
-      if (key[0] === '!') return; // Meta verileri atla
-
-      const cell = ws[key];
-
-      // Eğer hücrede bir değer varsa, buna border ekle
-      if (cell && cell.v !== undefined) {
-        cell.s = cell.s || {}; // Stil objesi oluştur
-
-        // Border'ı hücreye ekle
-        cell.s.border = borderStyle;
-      }
-    });
-
     // Çalışma kitabını oluşturma
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
@@ -90,6 +85,7 @@ function AccountList() {
     // Excel dosyasını indirme
     XLSX.writeFile(wb, 'data.xlsx');
 };
+
 
 
   useEffect(() => {
