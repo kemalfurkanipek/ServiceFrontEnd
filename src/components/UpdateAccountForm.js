@@ -8,7 +8,7 @@ function UpdateAccountForm() {
   const [totalDebt, setTotalDebt] = useState(9000);
   const [remainingDebt, setRemainingDebt] = useState(9000);
   const [monthlyPayments, setMonthlyPayments] = useState([]);
-  const [students, setStudents] = useState([]);
+  const [students] = useState([]);
   const [open, setOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
