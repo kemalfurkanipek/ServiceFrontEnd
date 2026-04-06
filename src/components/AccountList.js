@@ -26,11 +26,11 @@ function AccountList() {
   const [selectedMonth, setSelectedMonth] = useState('');
   const [amount, setAmount] = useState('');
   const [nameFilter, setNameFilter] = useState('');
-  const [totalDebtFilter, setTotalDebtFilter] = useState('');
-  const [remainingDebtFilter, setRemainingDebtFilter] = useState('');
-  const [showNameTooltip, setShowNameTooltip] = useState(false);
-  const [showTotalDebtTooltip, setShowTotalDebtTooltip] = useState(false);
-  const [showRemainingDebtTooltip, setShowRemainingDebtTooltip] = useState(false);
+  const [totalDebtFilter] = useState('');
+  const [remainingDebtFilter] = useState('');
+  const [, setShowNameTooltip] = useState(false);
+  const [, setShowTotalDebtTooltip] = useState(false);
+  const [, setShowRemainingDebtTooltip] = useState(false);
   const [excelData,setExcelData] = useState([]);
   const [excel,setExcel] = useState(false);
   const nameButtonRef = useRef(null);
@@ -150,7 +150,7 @@ function AccountList() {
     let excelDataNew = [];
     console.log('Filtered SON --->',filtered)
 
-    filtered.map((item,index) =>{
+    filtered.forEach((item,index) =>{
         excelDataNew.push({
           'sıra no': index +1,
           'öğrenci ismi': item.studentId.name + item.studentId.surname,
